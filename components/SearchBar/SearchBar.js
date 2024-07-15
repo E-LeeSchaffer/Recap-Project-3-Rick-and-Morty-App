@@ -4,7 +4,7 @@ export function searchCharacterInSearchBar(searchQuery, fetchCharacters, page) {
     event.preventDefault();
     const formData = new FormData(searchBar);
     searchQuery.value = formData.get("query");
-    page.value = 1;
+    page = 1;
     fetchCharacters();
   });
 }
