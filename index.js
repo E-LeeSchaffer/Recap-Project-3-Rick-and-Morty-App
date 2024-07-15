@@ -1,4 +1,5 @@
 import { CharacterCard } from "./components/CharacterCard/CharacterCard.js";
+import { searchCharacterInSearchBar } from "./components/SearchBar/SearchBar.js";
 
 const cardContainer = document.querySelector('[data-js="card-container"]');
 const searchBarContainer = document.querySelector(
@@ -25,4 +26,6 @@ async function fetchCharacters() {
     console.error("Error fetching characters:", error);
   }
 }
+
 fetchCharacters();
+searchCharacterInSearchBar(searchQuery, fetchCharacters);
