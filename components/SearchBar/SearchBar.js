@@ -1,10 +1,10 @@
-export function searchCharacterInSearchBar(searchQuery, fetchCharacters) {
+export function searchCharacterInSearchBar(searchQuery, fetchCharacters, page) {
   const searchBar = document.querySelector('[data-js="search-bar"]');
   searchBar.addEventListener("submit", (event) => {
     event.preventDefault();
     const formData = new FormData(searchBar);
-    searchQuery = formData.get("query");
-    page = 1;
+    searchQuery.value = formData.get("query");
+    page.value = 1;
     fetchCharacters();
   });
 }
