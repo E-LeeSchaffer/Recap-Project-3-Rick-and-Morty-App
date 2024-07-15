@@ -19,8 +19,12 @@ async function fetchCharacters() {
   try {
     const response = await fetch("https://rickandmortyapi.com/api/character/");
     const data = await response.json();
-    console.log(data.results);
-    return data.results;
+
+    cardContainer.innerHTML = "";
+    data.results.forEach((character) => {
+      const card = CharacterCard(character);
+      cardContainer.appendChild(card);
+    });
   } catch (error) {
     console.error("Error fetching characters:", error);
   }
