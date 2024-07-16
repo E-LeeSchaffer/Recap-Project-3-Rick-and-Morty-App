@@ -1,19 +1,9 @@
-// export function searchCharacterInSearchBar(searchQuery, fetchCharacters, page) {
-//   const searchBar = document.querySelector('[data-js="search-bar"]');
-//   searchBar.addEventListener("submit", (event) => {
-//     event.preventDefault();
-//     const formData = new FormData(searchBar);
-//     searchQuery.value = formData.get("query");
-//     page = 1;
-//     fetchCharacters();
-//   });
-// }
+const searchBar = document.querySelector('[data-js="search-bar"]');
 
-// console.log(searchCharacterInSearchBar);
-
-// Aus html
-/* <form action="" class="search-bar" data-js="search-bar">
-          <input
+export function SearchBar(onSubmit) {
+  const form = document.createElement("form");
+  form.innerHTML = `
+  <input
             name="query"
             class="search-bar__input"
             type="text"
@@ -27,4 +17,8 @@
               alt=""
             />
           </button>
-        </form> */
+  `;
+  form.className = "search-bar";
+  form.addEventListener("submit", onSubmit);
+  return form;
+}
