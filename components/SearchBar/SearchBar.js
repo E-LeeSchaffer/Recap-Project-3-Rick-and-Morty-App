@@ -8,3 +8,5 @@ export function searchCharacterInSearchBar(searchQuery, fetchCharacters, page) {
     fetchCharacters();
   });
 }
+
+console.log(searchCharacterInSearchBar);
