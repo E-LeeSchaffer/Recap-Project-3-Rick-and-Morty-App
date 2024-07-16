@@ -1,4 +1,6 @@
 import { CharacterCard } from "./components/CharacterCard/CharacterCard.js";
+import { NavButton } from "./components/NavButton/NavButton.js";
+import { NavPagination } from "./components/NavPagination/NavPagination.js";
 
 const cardContainer = document.querySelector('[data-js="card-container"]');
 const searchBarContainer = document.querySelector(
@@ -6,20 +8,18 @@ const searchBarContainer = document.querySelector(
 );
 const searchBar = document.querySelector('[data-js="search-bar"]');
 const navigation = document.querySelector('[data-js="navigation"]');
-const prevButton = document.querySelector('[data-js="button-prev"]');
-const nextButton = document.querySelector('[data-js="button-next"]');
-const pagination = document.querySelector('[data-js="pagination"]');
+// const prevButton = document.querySelector('[data-js="button-prev"]');
+// const nextButton = document.querySelector('[data-js="button-next"]');
+const paginationContainer = document.querySelector('[data-js="pagination"]'); // const geändert.
 
 // States
 const maxPage = 42;
 let page = 1;
 let searchQuery = "";
 
-
 async function fetchCharacters() {
   const url = `https://rickandmortyapi.com/api/character/?page=${page}&name=${searchQuery}`;
   try {
-
     const response = await fetch(url);
 
     const data = await response.json();
@@ -35,28 +35,29 @@ async function fetchCharacters() {
       });
       cardContainer.appendChild(card);
     });
-
-    pagination.textContent = `${page} / ${maxPage}`;
+    // Code hier geändert um die Pagination dynamisch zu generieren //
+    paginationContainer.innerHTML = "";
+    const pagination = NavPagination(page, maxPage);
+    paginationContainer.appendChild(pagination);
+    //Bis hier///
   } catch (error) {
     console.error("Error fetching characters:", error);
   }
 }
 
-
-prevButton.addEventListener("click", () => {
+const prevClick = () => {
   if (page > 1) {
     page--;
     fetchCharacters();
   }
-});
+};
 
-nextButton.addEventListener("click", () => {
+const nextClick = () => {
   if (page < maxPage) {
     page++;
     fetchCharacters();
   }
-});
-
+};
 
 searchBar.addEventListener("submit", (event) => {
   event.preventDefault();
@@ -65,3 +66,10 @@ searchBar.addEventListener("submit", (event) => {
   page = 1;
   fetchCharacters();
 });
+
+const prevButton = NavButton("previous", prevClick);
+const nextButton = NavButton("next", nextClick);
+
+navigation.append(prevButton, nextButton);
+
+fetchCharacters();
