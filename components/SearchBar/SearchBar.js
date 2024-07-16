@@ -1,5 +1,3 @@
-const searchBar = document.querySelector('[data-js="search-bar"]');
-
 export function SearchBar(onSubmit) {
   const form = document.createElement("form");
   form.innerHTML = `
