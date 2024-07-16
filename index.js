@@ -70,6 +70,6 @@ searchBar.addEventListener("submit", (event) => {
 const prevButton = NavButton("previous", prevClick);
 const nextButton = NavButton("next", nextClick);
 
-navigation.append(prevButton, nextButton);
+navigation.append(prevButton, paginationContainer, nextButton);
 
 fetchCharacters();
