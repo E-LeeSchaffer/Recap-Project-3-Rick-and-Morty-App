@@ -35,11 +35,7 @@ async function fetchCharacters() {
       });
       cardContainer.appendChild(card);
     });
-    // Code hier geändert um die Pagination dynamisch zu generieren //
-    paginationContainer.innerHTML = "";
-    const pagination = NavPagination(page, maxPage);
-    paginationContainer.appendChild(pagination);
-    //Bis hier///
+    paginationContainer.textContent = `${page} / ${maxPage}`;
   } catch (error) {
     console.error("Error fetching characters:", error);
   }
