@@ -15,15 +15,24 @@ const maxPage = 42;
 let page = 1;
 let searchQuery = "";
 
+
 async function fetchCharacters() {
   const url = `https://rickandmortyapi.com/api/character/?page=${page}&name=${searchQuery}`;
   try {
+
     const response = await fetch(url);
+
     const data = await response.json();
 
     cardContainer.innerHTML = "";
     data.results.forEach((character) => {
-      const card = CharacterCard(character);
+      const card = CharacterCard({
+        image: character.image,
+        name: character.name,
+        status: character.status,
+        type: character.type,
+        occurrences: character.episode.length,
+      });
       cardContainer.appendChild(card);
     });
 
@@ -32,6 +41,7 @@ async function fetchCharacters() {
     console.error("Error fetching characters:", error);
   }
 }
+
 
 prevButton.addEventListener("click", () => {
   if (page > 1) {
@@ -46,7 +56,7 @@ nextButton.addEventListener("click", () => {
     fetchCharacters();
   }
 });
-fetchCharacters();
+
 
 searchBar.addEventListener("submit", (event) => {
   event.preventDefault();
